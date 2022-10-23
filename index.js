@@ -1,4 +1,17 @@
 window.onload = function () {
+    const isMobile = window.matchMedia('only screen and (max-width: 800px)').matches;
+    console.log(isMobile);
+    if (isMobile) {
+        var content = document.getElementById('content');
+        content.remove();
+        var content = document.getElementById('nav-menu');
+        content.remove();
+        var mobileMain = document.createElement("main");
+        mobileMain.id = "mobile-main";
+        mobileMain.innerHTML = "<div class='mobile-div glow-section' id='mobile-div'><a href='#'>Astrogamer54.com</a><h1>we ran into a problem :(</h1><h1>your screensize is too small for this website</h1></div>";
+        document.body.appendChild(mobileMain);
+        document.body.id = "nav-menu"; // scuffed work around
+    }
     // WHY IS THIS NOT WORKING PLS HELP
     var prevScrollpos = window.pageYOffset;
     document.body.onscroll = function () {
@@ -10,12 +23,12 @@ window.onload = function () {
             document.getElementById("nav-menu").style.top = translate('0%', '100%');
         }
         prevScrollpos = currentScrollPos;
-    
-    };  
+
+    };
     //end of not working
     let effectcheck;
     document.getElementById('nav-menu').onmousemove = function clickEvent(e) {
-        for (const nav of document.getElementsByClassName("nav-section")) {
+        for (const nav of document.getElementsByClassName("glow-section")) {
             const rect = nav.getBoundingClientRect(),
                 x = e.clientX - rect.left,
                 y = e.clientY - rect.top;
@@ -27,7 +40,7 @@ window.onload = function () {
     };
     document.getElementById('nav-menu').onmouseenter = function fade(e) {
         var max = 100;
-        for (const nav of document.getElementsByClassName("nav-section")) {
+        for (const nav of document.getElementsByClassName("glow-section")) {
             if (!effectcheck) {
                 effectcheck = setInterval(repeatcheck, 1);
             }

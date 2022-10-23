@@ -4,6 +4,8 @@
     --nav-color: #43e;
     --glow-percent: 0;
     --glow-background: #43e;
+    --mouse-x: 0px;
+    --mouse-y: 0px;
 }
 body {
     background-color: var(--background-color);
@@ -117,13 +119,13 @@ li {
   text-shadow: 0px 5px rgba(0, 0, 0, 0.2);
   z-index: 0;
 }
-main{
+main.content{
   overflow-y: scroll;
   overflow-x: hidden;
   -ms-overflow-style: none; 
   scrollbar-width: none;  
 }
-main::-webkit-scrollbar{
+main.content::-webkit-scrollbar{
   display: none;
 }
 .page-description,
@@ -163,5 +165,25 @@ p {
   margin: auto;
   width: 20vw;
 }
-
-
+.mobile-div{
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f35;
+  background: radial-gradient(600px circle at var(--mouse-x) var(--mouse-y),
+  #f35 0%,
+  #43e var(--glow-percent));
+  overflow-y: hidden;  
+  overflow-x: hidden; 
+  padding-left: 10vw;
+  padding-right: 10vw;
+}
+.mobile-div > h1{
+  font-size: 5vw;
+  text-align: center;
+}
+.mobile-div > a{
+  font-size: 10vw;
+  padding-top: 10vh;
+  text-align: center;
+}
