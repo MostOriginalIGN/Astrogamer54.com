@@ -1,4 +1,5 @@
 window.onload = function () {
+    // WHY IS THIS NOT WORKING PLS HELP
     window.onscroll = function () {
         console.log("a");
         var currentScrollPos = window.pageYOffset;
@@ -10,7 +11,8 @@ window.onload = function () {
         prevScrollpos = currentScrollPos;
     
     };  
-    let clearcheck;
+    //end of not working
+    let effectcheck;
     var prevScrollpos = window.pageYOffset;
     document.getElementById('nav-menu').onmousemove = function clickEvent(e) {
         for (const nav of document.getElementsByClassName("nav-section")) {
@@ -26,14 +28,14 @@ window.onload = function () {
     document.getElementById('nav-menu').onmouseenter = function fade(e) {
         var max = 100;
         for (const nav of document.getElementsByClassName("nav-section")) {
-            if (!clearcheck) {
-                clearcheck = setInterval(repeatcheck, 1);
+            if (!effectcheck) {
+                effectcheck = setInterval(repeatcheck, 1);
             }
             function repeatcheck() {
                 if (max > 0) {
                     max = max - 1
                 } else {
-                    clearInterval(clearcheck);
+                    clearInterval(effectcheck);
                     console.log('a');
                 }
                 document.documentElement.style.setProperty("--glow-percent", `${100 - max}%`);
@@ -43,9 +45,9 @@ window.onload = function () {
         };
     };
     document.getElementById('nav-menu').onmouseleave = function fade(e) {
-        clearInterval(clearcheck);
+        clearInterval(effectcheck);
         var max = 100;
-        clearcheck = null;
+        effectcheck = null;
     };
     document.addEventListener('contextmenu', event => event.preventDefault());
 };
