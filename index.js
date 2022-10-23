@@ -1,5 +1,8 @@
 window.onload = function () {
-    const isMobile = window.matchMedia('only screen and (max-width: 800px)').matches;
+    const isSmall = window.matchMedia('only screen and (max-width: 800px)').matches;
+    const isVertical = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
+    const mobileAgent = typeof window.orientation !== 'undefined'
+    const isMobile = isSmall || isVertical || mobileAgent;
     console.log(isMobile);
     if (isMobile) {
         var content = document.getElementById('content');
