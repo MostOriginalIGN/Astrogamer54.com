@@ -3,6 +3,7 @@ window.onload = function () {
     const isVertical = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
     const mobileAgent = typeof window.orientation !== 'undefined'
     const isMobile = isSmall || isVertical || mobileAgent;
+    // Doesn't work on iOS Chrome (based on tests)
     console.log(isMobile);
     if (isMobile) {
         var content = document.getElementById('content');
@@ -14,7 +15,7 @@ window.onload = function () {
         mobileMain.innerHTML = "<div class='mobile-div glow-section' id='mobile-div'><a href='#'>Astrogamer54.com</a><h1>we ran into a problem :(</h1><h1>your screensize is too small for this website</h1></div>";
         document.body.appendChild(mobileMain);
         document.body.id = "nav-menu"; // scuffed work around
-    }
+    } 
     // WHY IS THIS NOT WORKING PLS HELP
     var prevScrollpos = window.pageYOffset;
     document.body.onscroll = function () {
