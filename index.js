@@ -1,6 +1,7 @@
 window.onload = function () {
     // WHY IS THIS NOT WORKING PLS HELP
-    window.onscroll = function () {
+    var prevScrollpos = window.pageYOffset;
+    document.body.onscroll = function () {
         console.log("a");
         var currentScrollPos = window.pageYOffset;
         if (prevScrollpos > currentScrollPos) {
@@ -13,7 +14,6 @@ window.onload = function () {
     };  
     //end of not working
     let effectcheck;
-    var prevScrollpos = window.pageYOffset;
     document.getElementById('nav-menu').onmousemove = function clickEvent(e) {
         for (const nav of document.getElementsByClassName("nav-section")) {
             const rect = nav.getBoundingClientRect(),
@@ -36,10 +36,8 @@ window.onload = function () {
                     max = max - 1
                 } else {
                     clearInterval(effectcheck);
-                    console.log('a');
                 }
                 document.documentElement.style.setProperty("--glow-percent", `${100 - max}%`);
-                console.log(max);
 
             };
         };
