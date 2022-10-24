@@ -105,6 +105,10 @@ window.onload = function() {
     function hideSplash() {
         setTimeout(() => {
             document.getElementById('splash').classList.add('doneLoading');
+            for (const nav of document.getElementsByClassName("nav-links")) {
+                nav.classList.add('nav-loaded')
+            }
+            document.getElementById("title").classList.add("title-loaded");
             setTimeout(() => {
                 var splash = document.getElementById('splash');
                 splash.remove();
