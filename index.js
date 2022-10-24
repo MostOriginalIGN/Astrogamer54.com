@@ -31,6 +31,15 @@ window.onload = function() {
 
     };
     //end of not working
+    if (document.readyState === 'ready' || document.readyState === 'complete') {
+        hideSplash();
+    } else {
+        document.onreadystatechange = function() {
+            if (document.readyState == "complete") {
+                hideSplash();
+            }
+        }
+    }
     let effectcheck;
     document.getElementById('nav-menu').onmousemove = function clickEvent(e) {
         for (const nav of document.getElementsByClassName("glow-section")) {
@@ -92,4 +101,10 @@ window.onload = function() {
         };
         document.addEventListener('contextmenu', event => event.preventDefault());
     };
+
+    function hideSplash() {
+        setTimeout(() => {
+            document.getElementById('splash').classList.add('doneLoading');
+        }, 1000)
+    }
 };
