@@ -105,6 +105,11 @@ window.onload = function() {
     function hideSplash() {
         setTimeout(() => {
             document.getElementById('splash').classList.add('doneLoading');
+            setTimeout(() => {
+                var splash = document.getElementById('splash');
+                splash.remove();
+            }, 1000)
         }, 1000)
+
     }
 };
