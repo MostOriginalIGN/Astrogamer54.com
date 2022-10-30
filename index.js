@@ -109,11 +109,34 @@ window.onload = function() {
                 nav.classList.add('nav-loaded')
             }
             document.getElementById("title").classList.add("title-loaded");
+            const titleLetters = document.getElementsByClassName("title-letter")
+            for(const element of titleLetters){
+                element.classList.add("title-letter-loaded");
+            }
             setTimeout(() => {
                 var splash = document.getElementById('splash');
                 splash.remove();
             }, 1000)
+            setTimeout(() => {
+                const titleLetters = document.getElementsByClassName("title-letter")
+                for(const element of titleLetters){
+                    element.classList.remove("title-letter-loaded");
+                }
+            }, 1200)
+            setTimeout(() => {
+                const a = document.getElementById('content');
+                a.classList.remove('no-scroll');
+                const ico = document.getElementById('scroll-icon');
+                ico.classList.add('ico-appear');
+            }, 2200)
         }, 1000)
 
     }
+    function staggerTitle() {
+        const letters = document.getElementsByClassName('title-letter');
+        for(let i = 0; i < letters.length; i++){
+            letters[i].style.transitionDelay = `${i * 50}ms`
+        }
+    }
+    staggerTitle();
 };

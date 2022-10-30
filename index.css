@@ -16,6 +16,7 @@ body {
     min-height: 100px;
     margin: 0px;
     overflow: hidden;
+    scroll-behavior: smooth;
 }
 
 * {
@@ -92,13 +93,11 @@ nav>.nav-section {
     animation: navLoad 2s;
 }
 
-.title-loaded {
-    animation: titleLoad 2.2s;
-}
-
 #nav-title-section {
     flex-grow: 1;
 }
+
+
 
 h1,
 h2,
@@ -110,6 +109,10 @@ span {
     font-weight: 400;
     font-size: 1.7vh;
     color: white;
+}
+
+#nav-menu a {
+    font-size: 1.1rem;
 }
 
 a {
@@ -128,6 +131,7 @@ li {
 }
 
 #front {
+    display: block;
     position: relative;
     transform: translate(-1%);
     width: 110vw;
@@ -137,6 +141,7 @@ li {
 
 #title {
     position: fixed;
+    width: 100%;
     transform-style: preserve-3d;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -145,11 +150,30 @@ li {
     z-index: 0;
 }
 
+.title-letter {
+    display: inline-block;
+    white-space: nowrap;
+    margin: 0vmin -1.3vw;
+    font-size: 10vw;
+    transition: color 2s;
+}
+
+.title-loaded {
+    animation: titleLoad 2.2s;
+}
+
+.title-letter-loaded {
+    color: #43e;
+}
+
 main.content {
-    overflow-y: scroll;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+.no-scroll {
+    overflow-y: hidden;
 }
 
 main.content::-webkit-scrollbar {
@@ -245,6 +269,7 @@ p {
     opacity: 0%;
 }
 
+
 #splash>img {
     display: inline;
     position: fixed;
@@ -255,6 +280,26 @@ p {
     opacity: 0.5;
 }
 
+#scroll-icon {
+    display: inline;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 5vmin 0vmin;
+    font-size: 2vmax;
+    size: 15vmax;
+    z-index: 20000;
+    opacity: 0;
+}
+
+.ico-appear {
+    animation: icoAppear 1s forwards;
+}
+
+/* keyframes 
+*/
 @keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);
@@ -262,6 +307,7 @@ p {
         -o-transform: rotate(0deg);
         transform: rotate(0deg);
     }
+
     100% {
         -webkit-transform: rotate(360deg);
         -ms-transform: rotate(360deg);
@@ -277,6 +323,7 @@ p {
         -o-transform: rotate(360deg);
         transform: rotate(360deg);
     }
+
     100% {
         -webkit-transform: rotate(0deg);
         -ms-transform: rotate(0deg);
@@ -289,6 +336,7 @@ p {
     0% {
         transform: translate(-100%, 0%);
     }
+
     100% {
         transform: translate(0%, 0%);
     }
@@ -297,8 +345,23 @@ p {
 @keyframes titleLoad {
     0% {
         transform: translate(-50%, -100%);
+        opacity: 0;
     }
+
     100% {
         transform: translate(-50%, 0%);
+        opacity: 1;
+    }
+}
+
+@keyframes icoAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0%) rotate(0deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(100%) rotate(360deg);
     }
 }
