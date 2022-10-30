@@ -295,7 +295,7 @@ p {
 }
 
 .ico-appear {
-    animation: icoAppear 1s forwards;
+    animation: icoAppear 2s forwards;
 }
 
 /* keyframes 
@@ -359,9 +359,16 @@ p {
         opacity: 0;
         transform: scale(0%) rotate(0deg);
     }
-
-    100% {
+    25% {
         opacity: 1;
         transform: scale(100%) rotate(360deg);
+    }
+    75% {
+        opacity: 1;
+        transform: scale(100%) rotate(360deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0%) rotate(0deg);
     }
 }
