@@ -3,7 +3,14 @@ window.onload = function() {
     const isVertical = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
     const mobileAgent = typeof window.orientation !== 'undefined'
     const isMobile = isSmall || isVertical || mobileAgent;
-    // Doesn't work on iOS Chrome (based on tests)
+    const aspRatio = window.innerWidth/window.innerHeight;
+    var small = false;
+    console.log(aspRatio);
+    if(aspRatio < 1.25){
+        const sm = document.getElementById('small');
+        sm.classList.add('showScreenWarning');
+        small = true;
+    }
     console.log(isMobile);
     if (isMobile) {
         document.documentElement.style.setProperty("--background-color", '#43e');
@@ -17,20 +24,32 @@ window.onload = function() {
         document.body.appendChild(mobileMain);
         document.body.id = "nav-menu"; // scuffed work around
     }
-    // WHY IS THIS NOT WORKING PLS HELP
-    var prevScrollpos = window.pageYOffset;
-    document.body.onscroll = function() {
-        console.log("a");
-        var currentScrollPos = window.pageYOffset;
+    
+    if(!isMobile){
+        var prevScrollpos = document.querySelector('#content').scrollTop;
+        document.querySelector('#content').addEventListener('scroll', (event) => {
+        parallax();
+        var currentScrollPos = document.querySelector('#content').scrollTop;
         if (prevScrollpos > currentScrollPos) {
-            document.getElementById("nav-menu").style.transform = translate('0%', '0%');
+            document.getElementById("nav-menu").style.transform  = "translate(0%,0%)";
         } else {
-            document.getElementById("nav-menu").style.top = translate('0%', '100%');
+            document.getElementById("nav-menu").style.transform  = "translate(0%,-100%)";
         }
         prevScrollpos = currentScrollPos;
+        if(currentScrollPos > 0){
+            void document.getElementById("scroll-icon").offsetWidth;
+            document.getElementById("scroll-icon").classList.remove("ico-appear");
+            document.getElementById("scroll-icon").classList.add("scrolled");
+        }else{
+            void document.getElementById("scroll-icon").offsetWidth;
+            document.getElementById("scroll-icon").classList.remove("scrolled");
+            document.getElementById("scroll-icon").classList.add("ico-appear");
+        }
 
-    };
-    //end of not working
+    });
+    }
+    
+    
     if (document.readyState === 'ready' || document.readyState === 'complete') {
         hideSplash();
     } else {
@@ -103,6 +122,11 @@ window.onload = function() {
     };
 
     function hideSplash() {
+        if(small==true){
+            var time = 3000;
+        }else{
+            var time = 1000;
+        }
         setTimeout(() => {
             document.getElementById('splash').classList.add('doneLoading');
             for (const nav of document.getElementsByClassName("nav-links")) {
@@ -129,7 +153,7 @@ window.onload = function() {
                 const ico = document.getElementById('scroll-icon');
                 ico.classList.add('ico-appear');
             }, 2200)
-        }, 1000)
+        }, time)
 
     }
     function staggerTitle() {
@@ -139,4 +163,8 @@ window.onload = function() {
         }
     }
     staggerTitle();
+    function parallax() {
+        var s = document.getElementById("title");
+      var yPos = 0 - (document.querySelector('#content').scrollTop)/20;  
+      s.style.top = yPos + "%"; }
 };

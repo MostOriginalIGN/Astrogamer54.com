@@ -7,7 +7,6 @@
     --mouse-x: 0px;
     --mouse-y: 0px;
 }
-
 body {
     background-color: var(--background-color);
     display: flex;
@@ -16,7 +15,6 @@ body {
     min-height: 100px;
     margin: 0px;
     overflow: hidden;
-    scroll-behavior: smooth;
 }
 
 * {
@@ -24,9 +22,12 @@ body {
 }
 
 nav {
+    position: fixed;
+    top: 0;
     display: flex;
     width: 100%;
-    transition: top 0.3s;
+    transition: transform 0.4s;
+    z-index: 299;
 }
 
 nav:hover>.nav-section {
@@ -167,6 +168,7 @@ li {
 }
 
 main.content {
+    scroll-behavior: smooth;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -188,6 +190,8 @@ main.content::-webkit-scrollbar {
 #description {
     padding: 0px;
     z-index: 3;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAHlBMVEUAAABkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGSH0mEbAAAACnRSTlMAzDPDPPPYnGMw2CgMzQAAAChJREFUKM9jgAPOAgZMwGIwKkhXQSUY0BCCMxkEYUAsEM4cjI4fwYIAf2QMNbUsZjcAAAAASUVORK5CYII=');
+    background-size: 15px;
 }
 
 .desc {
@@ -264,9 +268,21 @@ p {
     font-size: 5vmax;
     animation: spin 1s infinite;
 }
-
+#splash>h2 {
+    opacity: 0%;
+    position: fixed;
+    bottom: -5%;
+    display: inline;
+    color: white;
+    font-size: 3vmax;
+    transition: opacity 1s;
+    transition: bottom 1s;
+}
 .doneLoading {
     opacity: 0%;
+}
+.doneLoading>h2{
+    bottom: -50% !important;
 }
 
 
@@ -283,23 +299,31 @@ p {
 #scroll-icon {
     display: inline;
     position: fixed;
-    bottom: 0;
+    bottom: 5%;
     left: 0;
     width: 100%;
     text-align: center;
-    padding: 5vmin 0vmin;
     font-size: 2vmax;
     size: 15vmax;
-    z-index: 20000;
+    z-index: 2;
     opacity: 0;
+    color: black;
 }
 
 .ico-appear {
-    animation: icoAppear 2s forwards;
+    -webkit-animation: icoAppear 1s forwards;
+    animation: icoAppear 1s forwards;
 }
-
+.scrolled {
+    -webkit-animation: icoDisappear 1s forwards;
+    animation: icoDisappear 1s forwards;
+}
 /* keyframes 
 */
+.showScreenWarning {
+    bottom: 0% !important;
+    opacity: 1 !important;
+}
 @keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);
@@ -359,16 +383,18 @@ p {
         opacity: 0;
         transform: scale(0%) rotate(0deg);
     }
-    25% {
+    100% {
         opacity: 1;
         transform: scale(100%) rotate(360deg);
     }
-    75% {
-        opacity: 1;
-        transform: scale(100%) rotate(360deg);
-    }
+}
+@keyframes icoDisappear {
     100% {
         opacity: 0;
         transform: scale(0%) rotate(0deg);
+    }
+    0% {
+        opacity: 1;
+        transform: scale(100%) rotate(360deg);
     }
 }
