@@ -7,6 +7,11 @@
     --mouse-x: 0px;
     --mouse-y: 0px;
 }
+
+html {
+    cursor: none;
+}
+
 body {
     background-color: var(--background-color);
     display: flex;
@@ -21,6 +26,10 @@ body {
     box-sizing: border-box;
 }
 
+a:hover {
+    cursor: none;
+}
+
 nav {
     position: fixed;
     top: 0;
@@ -28,6 +37,28 @@ nav {
     width: 100%;
     transition: transform 0.4s;
     z-index: 299;
+}
+
+.cursor {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    color: #f35;
+    transition: all 200ms ease-out;
+    position: fixed;
+    pointer-events: none;
+    left: 0;
+    top: 0;
+    transform: translate(calc(-50% + 15px), -50%);
+    z-index: 100000;
+}
+
+.cursor-hover {
+    width: 7px !important;
+    height: 7px !important;
+    border: 7px solid #fff !important;
+
 }
 
 nav:hover>.nav-section {
@@ -268,6 +299,7 @@ p {
     font-size: 5vmax;
     animation: spin 1s infinite;
 }
+
 #splash>h2 {
     opacity: 0%;
     position: fixed;
@@ -278,10 +310,12 @@ p {
     transition: opacity 1s;
     transition: bottom 1s;
 }
+
 .doneLoading {
     opacity: 0%;
 }
-.doneLoading>h2{
+
+.doneLoading>h2 {
     bottom: -50% !important;
 }
 
@@ -292,6 +326,8 @@ p {
     width: 20vmax;
     height: 20vmax;
     border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
     animation: altspin 1s infinite;
     opacity: 0.5;
 }
@@ -314,16 +350,19 @@ p {
     -webkit-animation: icoAppear 1s forwards;
     animation: icoAppear 1s forwards;
 }
+
 .scrolled {
     -webkit-animation: icoDisappear 1s forwards;
     animation: icoDisappear 1s forwards;
 }
+
 /* keyframes 
 */
 .showScreenWarning {
     bottom: 0% !important;
     opacity: 1 !important;
 }
+
 @keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);
@@ -383,16 +422,19 @@ p {
         opacity: 0;
         transform: scale(0%) rotate(0deg);
     }
+
     100% {
         opacity: 1;
         transform: scale(100%) rotate(360deg);
     }
 }
+
 @keyframes icoDisappear {
     100% {
         opacity: 0;
         transform: scale(0%) rotate(0deg);
     }
+
     0% {
         opacity: 1;
         transform: scale(100%) rotate(360deg);
