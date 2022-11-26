@@ -324,6 +324,17 @@ p {
     bottom: 0% !important;
     opacity: 1 !important;
 }
+.links {
+    display: flex;
+    padding: 1rem 1rem;
+    gap: 1rem;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.footer-links>a:hover {
+    color: #43e
+}
 @keyframes spin {
     0% {
         -webkit-transform: rotate(0deg);
