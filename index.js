@@ -1,12 +1,13 @@
-window.onload = function() {
+window.onload = function () {
     const isSmall = window.matchMedia('only screen and (max-width: 800px)').matches;
     const isVertical = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent))
     const mobileAgent = typeof window.orientation !== 'undefined'
     const isMobile = isSmall || isVertical || mobileAgent;
-    const aspRatio = window.innerWidth/window.innerHeight;
+    const aspRatio = window.innerWidth / window.innerHeight;
     var small = false;
+    var a = document.querySelectorAll('a');
     console.log(aspRatio);
-    if(aspRatio < 1.25){
+    if (aspRatio < 1.25) {
         const sm = document.getElementById('small');
         sm.classList.add('showScreenWarning');
         small = true;
@@ -24,36 +25,36 @@ window.onload = function() {
         document.body.appendChild(mobileMain);
         document.body.id = "nav-menu"; // scuffed work around
     }
-    
-    if(!isMobile){
+
+    if (!isMobile) {
         var prevScrollpos = document.querySelector('#content').scrollTop;
         document.querySelector('#content').addEventListener('scroll', (event) => {
-        parallax();
-        var currentScrollPos = document.querySelector('#content').scrollTop;
-        if (prevScrollpos > currentScrollPos) {
-            document.getElementById("nav-menu").style.transform  = "translate(0%,0%)";
-        } else {
-            document.getElementById("nav-menu").style.transform  = "translate(0%,-100%)";
-        }
-        prevScrollpos = currentScrollPos;
-        if(currentScrollPos > 0){
-            void document.getElementById("scroll-icon").offsetWidth;
-            document.getElementById("scroll-icon").classList.remove("ico-appear");
-            document.getElementById("scroll-icon").classList.add("scrolled");
-        }else{
-            void document.getElementById("scroll-icon").offsetWidth;
-            document.getElementById("scroll-icon").classList.remove("scrolled");
-            document.getElementById("scroll-icon").classList.add("ico-appear");
-        }
+            parallax();
+            var currentScrollPos = document.querySelector('#content').scrollTop;
+            if (prevScrollpos > currentScrollPos) {
+                document.getElementById("nav-menu").style.transform = "translate(0%,0%)";
+            } else {
+                document.getElementById("nav-menu").style.transform = "translate(0%,-100%)";
+            }
+            prevScrollpos = currentScrollPos;
+            if (currentScrollPos > 0) {
+                void document.getElementById("scroll-icon").offsetWidth;
+                document.getElementById("scroll-icon").classList.remove("ico-appear");
+                document.getElementById("scroll-icon").classList.add("scrolled");
+            } else {
+                void document.getElementById("scroll-icon").offsetWidth;
+                document.getElementById("scroll-icon").classList.remove("scrolled");
+                document.getElementById("scroll-icon").classList.add("ico-appear");
+            }
 
-    });
+        });
     }
-    
-    
+
+
     if (document.readyState === 'ready' || document.readyState === 'complete') {
         hideSplash();
     } else {
-        document.onreadystatechange = function() {
+        document.onreadystatechange = function () {
             if (document.readyState == "complete") {
                 hideSplash();
             }
@@ -122,9 +123,9 @@ window.onload = function() {
     };
 
     function hideSplash() {
-        if(small==true){
+        if (small == true) {
             var time = 3000;
-        }else{
+        } else {
             var time = 1000;
         }
         setTimeout(() => {
@@ -134,7 +135,7 @@ window.onload = function() {
             }
             document.getElementById("title").classList.add("title-loaded");
             const titleLetters = document.getElementsByClassName("title-letter")
-            for(const element of titleLetters){
+            for (const element of titleLetters) {
                 element.classList.add("title-letter-loaded");
             }
             setTimeout(() => {
@@ -143,7 +144,7 @@ window.onload = function() {
             }, 1000)
             setTimeout(() => {
                 const titleLetters = document.getElementsByClassName("title-letter")
-                for(const element of titleLetters){
+                for (const element of titleLetters) {
                     element.classList.remove("title-letter-loaded");
                 }
             }, 1200)
@@ -158,13 +159,29 @@ window.onload = function() {
     }
     function staggerTitle() {
         const letters = document.getElementsByClassName('title-letter');
-        for(let i = 0; i < letters.length; i++){
+        for (let i = 0; i < letters.length; i++) {
             letters[i].style.transitionDelay = `${i * 50}ms`
         }
     }
     staggerTitle();
     function parallax() {
         var s = document.getElementById("title");
-      var yPos = 0 - (document.querySelector('#content').scrollTop)/20;  
-      s.style.top = yPos + "%"; }
+        var yPos = 0 - (document.querySelector('#content').scrollTop) / 20;
+        s.style.top = yPos + "%";
+    }
+
+    var cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', function (e) {
+        var x = e.clientX;
+        var y = e.clientY;
+        cursor.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`
+    });
+    a.forEach(item => {
+        item.addEventListener('mouseover', () => {
+            cursor.classList.add('cursor-hover');
+        });
+        item.addEventListener('mouseleave', () => {
+            cursor.classList.remove('cursor-hover');
+        });
+    })
 };
